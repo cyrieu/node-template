@@ -1,0 +1,16 @@
+version: '3'
+services:
+  web:
+    build: ./server
+    volumes:
+      - ./server:/app
+      - /app/node_modules/
+    ports:
+      - "8081:8081"
+    env_file: web.env
+    depends_on:
+      - db
+  db:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
