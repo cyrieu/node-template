@@ -4,7 +4,6 @@ services:
     build: ./server
     volumes:
       - ./server:/app
-      - /app/node_modules/
     ports:
       - "8081:8081"
     env_file: web.env
@@ -12,5 +11,7 @@ services:
       - db
   db:
     image: postgres:latest
+    volumes:
+      - ./server/db/init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
       - "5432:5432"
